@@ -18,5 +18,10 @@ pipeline {
                 sh './myapp'
             }
         }
+        stage('Save Artifact'){
+            steps {
+                archiveArtifacts artifacts: 'myapp' , fingerprint: true
+            }
+        }
     }
 }
