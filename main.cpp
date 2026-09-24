@@ -40,7 +40,7 @@ int main() {
     }
 
     if (isSorted) {
-        std::cout << "Test Passed: QuickSort algorithm worked correctly. Array is sorted!" << std::endl;
+        std::cout << "Hello from Development. Test Passed: QuickSort algorithm worked correctly. Array is sorted!" << std::endl;
         return 0; // Success - Jenkins pipeline continues
     } else {
         std::cerr << "Test Failed: Array is not sorted." << std::endl;
