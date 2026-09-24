@@ -1,28 +1,49 @@
 #include <iostream>
 #include <vector>
 
-int binarySearch(const std::vector<int>& arr, int target) {
-    int left = 0, right = arr.size() - 1;
-    while (left <= right) {
-        int mid = left + (right - left) / 2;
-        if (arr[mid] == target) return mid;
-        if (arr[mid] < target) left = mid + 1;
-        else right = mid - 1;
+// Function to partition the array
+int partition(std::vector<int>& arr, int low, int high) {
+    int pivot = arr[high];
+    int i = (low - 1);
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            std::swap(arr[i], arr[j]);
+        }
     }
-    return -1;
+    std::swap(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+
+// QuickSort function
+void quickSort(std::vector<int>& arr, int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
 }
 
 int main() {
-    std::vector<int> data = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
-    int target = 23;
-    int result = binarySearch(data, target);
+    std::vector<int> data = {87, 45, 23, 90, 11, 6, 33};
+    
+    std::cout << "Starting QuickSort build test...\n";
+    quickSort(data, 0, data.size() - 1);
+    
+    // Automated Test Condition: Check if array is sorted
+    bool isSorted = true;
+    for (size_t i = 0; i < data.size() - 1; i++) {
+        if (data[i] > data[i + 1]) {
+            isSorted = false;
+            break;
+        }
+    }
 
-    // Automated Test Condition
-    if (result == 5) {
-        std::cout << "Test Passed: Target found at correct index." << std::endl;
+    if (isSorted) {
+        std::cout << "Test Passed: QuickSort algorithm worked correctly. Array is sorted!" << std::endl;
         return 0; // Success - Jenkins pipeline continues
     } else {
-        std::cerr << "Test Failed: Expected index 5, but got " << result << std::endl;
-        return 1; // Failure - Jenkins pipeline will FAIL here!
+        std::cerr << "Test Failed: Array is not sorted." << std::endl;
+        return 1; // Failure - Jenkins pipeline will FAIL
     }
 }
