@@ -27,6 +27,7 @@ pipeline {
             steps {
                 archiveArtifacts artifacts: 'myapp' , fingerprint: true
             }
+        }
         stage('Approval'){
             steps {
                 input message: 'Do you want to deploy to productions?', ok: 'Deploy'
