@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/ThanujaSanjuka/Jenkins-CPP-Test.git'
+                git branch: 'development', url: 'https://github.com/ThanujaSanjuka/Jenkins-CPP-Test.git'
             }
         }
         stage('Build C++') {
