@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+        stage('Cleanup Workplace'){
+            steps {
+                sh 'rm -f  myapp'
+            }
+        }
         stage('Checkout Code') {
             steps {
                 git branch: 'development', url: 'https://github.com/ThanujaSanjuka/Jenkins-CPP-Test.git'
